@@ -20,16 +20,18 @@ public class TextCounterServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
 
         String tekst = request.getParameter("tekst");
-        int character = 0;
+        int character = tekst.length();
 
-        for (int i = 0; i < tekst.length(); i++) {
-            character++;
-        }
+
 
         String[] words = tekst.split(" ");
         byte[] byteText = tekst.getBytes();
         byte[] rewerstext = new byte[byteText.length];
 
+
+        int lengthWithoutSpace = tekst.replace(" ", "").length();
+
+        
         for (int i = 0; i < byteText.length; i++) {
             rewerstext[i] = byteText[byteText.length - i - 1];
         }
@@ -38,7 +40,7 @@ public class TextCounterServlet extends HttpServlet {
 
         writer.println("Ilość słów: " + words.length);
         writer.println("Ilość znaków: " + character);
-        writer.println("Ilość znaków bez spacji: " + (character - (words.length - 1)));
+        writer.println("Ilość znaków bez spacji: " + lengthWithoutSpace);
         writer.println("Palindrom: " + palindrom);
 
     }
